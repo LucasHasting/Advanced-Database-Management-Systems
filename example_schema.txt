@@ -1,0 +1,56 @@
+{
+_id: <ObjectId>,
+employees = [
+    {
+      emp_no: 1,
+      birth_date: "12/12/2012",
+      first_name: "John",
+      last_name: "Doe",
+      gender: 'M',
+      hire_date: "12/1/2010",
+      salaries: [
+        {
+          salary: 1,
+          from_date: "12/1/2010",
+          to_date: "99/99/2099"
+        },
+        {...}
+        ],
+      titles: [
+        {
+          title: "worker",
+          from_date: "12/1/2010",
+          to_date: "99/99/2099"
+        },
+        {...}
+        ]
+    },
+    {...}
+    ]
+}
+{
+_id: <ObjectId>,
+departments: [
+      {
+        dept_no: 2,
+        dept_name: "cool dudes",
+        dept_manager: [
+          {
+              emp_no: 5,
+              from_date: "1/1/1",
+              to_date: "999/999/9999"
+          },
+          {...}
+        ]
+        dept_emp: [
+          {
+              emp_no: 1,
+              from_date: "12/1/2010",
+              to_date: "99/99/2099"
+          },
+          {...}
+        ]
+      },
+      {...}
+    ]
+}
