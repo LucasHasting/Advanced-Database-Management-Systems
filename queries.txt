@@ -1,0 +1,99 @@
+1. Write the mongosh command to delete all sales documents for customer with the email address 'wa@fuw.bh'.
+
+db.sales.deleteMany({"email": "wa@fuw.bh"});
+- db.collection.deleteMany({}) //delete all documents
+
+2. Write the mongosh command to insert the following document into sales
+
+db.sales.insertOne({
+    saleDate: ISODate('2015-03-10T12:10:08.963Z'),
+    items: [
+      {
+        name: 'pens',
+        tags: [ 'writing', 'office', 'school', 'stationary' ],
+        price: Decimal128('15.76'),
+        quantity: 3
+      },
+      {
+        name: 'envelopes',
+        tags: [ 'stationary', 'office', 'general' ],
+        price: Decimal128('21.24'),
+        quantity: 2
+      },
+      {
+        name: 'notepad',
+        tags: [ 'office', 'writing', 'school' ],
+        price: Decimal128('8.81'),
+        quantity: 1
+      },
+    ],
+    storeLocation: 'New York',
+    customer: { gender: 'M', age: 50, email: 'rm@sdcb.net', satisfaction: 6 },
+    couponUsed: false,
+    purchaseMethod: 'Online'
+  });
+
+3. Write a mongosh command to find all sales documents purchased in Seattle from customers over the age of 42. (You can use count to see the number).
+
+db.sales.find({"customer.age": {$gt: 42}, storeLocation: "Seattle"}).count();
+
+or
+
+db.sales.find({$and: [{"customer.age": {$gt: 42}}, {storeLocation: "Seattle"}]}).count();
+
+4. Write a mongosh command to find all sales documents purchase online that used a coupon. (You can use count to see the number)
+
+db.sales.find({purchaseMethod: 'Online', couponUsed: true}).count();
+
+5. Write a mongosh command to update all occurrences of 'binder' as an item to '3ringbinder'.
+
+db.sales.updateMany({"items.name": "binder"}, {$set: {"items.$[].name": "3ringbinder"}})
+- $[] facilitates updates to arrays that contain embedded documents
+
+6. Write a mongosh command to find all documents with a customer satifaction rating of 1 OR the customer was under the age of 20.
+
+db.sales.find({$or: [{"customer.satisfaction": 1}, {"customer.age": {$lt: 20}}]}).count();
+
+Class. sales collection: orders have an envelope and notepad, 20 < age < 35
+
+db.sales.find({
+    $and: [
+        {"items.name": {$in: ["envelopes", "notepad"]}},
+        {"customer.age": {$lte: 35}},
+        {"customer.age": {$gte: 20}}
+    ]
+})
+
+db.sales.find({
+    $and: [
+        {"items.name": {$in: ["envelopes", "notepad"]}},
+        {"customer.age": {$lte: 35}},
+        {"customer.age": {$gte: 20}}
+    ]
+}, {"items.name": 1, _id: 0})
+
+Insertion Syntax:
+
+db.inventory.insertMany([
+   { },
+   { },
+   ...
+])
+
+db.inventory.insertOne(
+   { }
+)
+
+Projection Example:
+
+db.inventory.find( { status: "A" }, { item: 1, status: 1, _id: 0 } )
+
+Update:
+$unset: ["<field1>", ...]
+$inc: {field: value}
+
+Creating a new database and collection:
+show dbs
+use database
+show collections
+db.collection.insert()

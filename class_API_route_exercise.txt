@@ -1,0 +1,32 @@
+Mflix:
+Collections: Movies, Users, Theaters, Comments
+
+API to handle data in Collections
+
+CRUD for each Collections 
+
+//Movies:
+
+// retrieve all movie
+GET -> '/v1/movies
+
+// retrieve a single movie
+GET -> '/v1/movie/:id'
+
+// insert a new movie
+POST -> '/v1/movie'
+
+// update a movie
+PUT -> '/v1/movie/:id'
+
+// delete a movie
+DELETE -> '/v1/movie/:id'
+
+//Comments
+
+// retrieve comments for a movie
+GET -> '/v1/movies/:identifier/comments
+- could put the parameter in the body of the request
+
+// retrieve all comments for a user
+GET -> '/v1/users/:identifier/comments
